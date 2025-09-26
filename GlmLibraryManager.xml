@@ -1,0 +1,148 @@
+<katana release="4.5v2" version="4.5.1.000008">
+  <node name="__SAVE_exportedNodes" type="Group">
+    <node baseType="Group" edited="true" eyepointx="-2852.07" eyepointy="-1011.78" eyepointz="0.0" name="GlmLibraryManager" ns_basicDisplay="1.0" ns_bubbleZoom="0.0" ns_colorb="0.0470588" ns_colorg="0.513725" ns_colorr="0.909804" ns_errorGlow="0.0" ns_fromContext="legacy" ns_iconName="" ns_offsetX="337.0" ns_offsetY="144.0" selected="true" type="Group" viewed="true" viewscalex="2.0" viewscaley="2.0" viewscalez="1.0" x="-15.5" y="21.5">
+      <port name="i0" type="in"/>
+      <port name="o0" type="out"/>
+      <group_parameter name="GlmLibraryManager">
+        <group_parameter hints="{&apos;hideTitle&apos;: &apos;True&apos;}" name="user">
+          <group_parameter hints="{&apos;open&apos;: &apos;True&apos;}" name="Cache">
+            <string_parameter hints="{&apos;widget&apos;: &apos;fileInput&apos;}" name="Path" value=""/>
+            <string_parameter hints="{&apos;widget&apos;: &apos;scriptButton&apos;, &apos;scriptText&apos;: &quot;import GlmLibraryManager\nreload(GlmLibraryManager)\n\nlayout = node.getParameter(&apos;user.Cache.Path&apos;).getValue(0)\n\nGlmLibraryManager.create(layout, node)\n&quot;}" name="Create" value=""/>
+          </group_parameter>
+          <group_parameter hints="{&apos;open&apos;: &apos;True&apos;}" name="Settings">
+            <group_parameter hints="{&apos;open&apos;: &apos;True&apos;}" name="MotionBlur">
+              <number_parameter expression="0.0 if getNode(&apos;%s&apos;%user.Settings.MotionBlur.NodeName).args.renderSettings.maxTimeSamples.value &lt;= 1.0 else 1.0" hints="{&apos;widget&apos;: &apos;checkBox&apos;}" isexpression="true" name="Enable"/>
+              <number_parameter expression="getNode(&apos;%s&apos;%user.Settings.MotionBlur.NodeName).args.renderSettings.maxTimeSamples.value" isexpression="true" name="maxTimeSamples"/>
+              <number_parameter expression="getNode(&apos;%s&apos;%user.Settings.MotionBlur.NodeName).args.renderSettings.shutterOpen.value" isexpression="true" name="shutterOpen"/>
+              <number_parameter expression="getNode(&apos;%s&apos;%user.Settings.MotionBlur.NodeName).args.renderSettings.shutterClose.value" isexpression="true" name="shutterClose"/>
+              <string_parameter hints="{&apos;widget&apos;: &apos;scriptToolbar&apos;, &apos;buttonData&apos;: [{&apos;text&apos;: &apos;Link RednerSetting&apos;, &apos;icon&apos;: &apos;&apos;, &apos;scriptText&apos;: &apos;# edit expression\nEnable = &quot;0.0 if getNode(\&apos;%s\&apos;%user.Settings.MotionBlur.NodeName).args.renderSettings.maxTimeSamples.value &lt;= 1.0 else 1.0&quot;\nmaxTimeSamples = &quot;getNode(\&apos;%s\&apos;%user.Settings.MotionBlur.NodeName).args.renderSettings.maxTimeSamples.value&quot;\nshutterOpen = &quot;getNode(\&apos;%s\&apos;%user.Settings.MotionBlur.NodeName).args.renderSettings.shutterOpen.value&quot;\nshutterClose = &quot;getNode(\&apos;%s\&apos;%user.Settings.MotionBlur.NodeName).args.renderSettings.shutterClose.value&quot;\n\n# set expression\nnode.getParameter(\&apos;user.Settings.MotionBlur.Enable\&apos;).setExpression(Enable, 2)\nnode.getParameter(\&apos;user.Settings.MotionBlur.maxTimeSamples\&apos;).setExpression(maxTimeSamples, 2)\nnode.getParameter(\&apos;user.Settings.MotionBlur.shutterOpen\&apos;).setExpression(shutterOpen, 2)\nnode.getParameter(\&apos;user.Settings.MotionBlur.shutterClose\&apos;).setExpression(shutterClose, 2)\n\n# get node name\nget_all_node = NodegraphAPI.GetAllNodesByType(\&apos;RenderSettings\&apos;)\nname_list = []\nfor i in get_all_node:\n    if \&apos;res\&apos; not in i.getName():\n        name_list.append(i.getName())\n\n# set node name list\nnodename_parm = node.getParameter(\&apos;user.Settings.MotionBlur.NodeName\&apos;)\nhints = {\&apos;widget\&apos;:\&apos;popup\&apos;, \&apos;options\&apos;: name_list, \&apos;hide\&apos;: False}\nnodename_parm.setHintString( repr(hints) )\nnodename_parm.setValue(name_list[0], 0)&apos;, &apos;flat&apos;: 0}, {&apos;text&apos;: &apos;Manual Setting&apos;, &apos;icon&apos;: &apos;&apos;, &apos;scriptText&apos;: &quot;# set manual\nnode.getParameter(&apos;user.Settings.MotionBlur.Enable&apos;).setExpressionFlag(False)\nnode.getParameter(&apos;user.Settings.MotionBlur.Enable&apos;).setValue(1, 0)\nnode.getParameter(&apos;user.Settings.MotionBlur.maxTimeSamples&apos;).setExpressionFlag(False)\nnode.getParameter(&apos;user.Settings.MotionBlur.maxTimeSamples&apos;).setValue(2, 0)\nnode.getParameter(&apos;user.Settings.MotionBlur.shutterOpen&apos;).setExpressionFlag(False)\nnode.getParameter(&apos;user.Settings.MotionBlur.shutterOpen&apos;).setValue(-0.25, 0)\nnode.getParameter(&apos;user.Settings.MotionBlur.shutterClose&apos;).setExpressionFlag(False)\nnode.getParameter(&apos;user.Settings.MotionBlur.shutterClose&apos;).setValue(0.25, 0)\n\n# hide node name\nnodename_parm = node.getParameter(&apos;user.Settings.MotionBlur.NodeName&apos;)\nhints = {&apos;hide&apos;: True}\nnodename_parm.setHintString( repr(hints) )\n\n\n&quot;, &apos;flat&apos;: 0}]}" name="blur_bottons" value=""/>
+              <string_parameter hints="{&apos;widget&apos;: &apos;popup&apos;, &apos;hide&apos;: False, &apos;options&apos;: [&apos;RenderSettings&apos;]}" name="NodeName" value="RenderSettings"/>
+            </group_parameter>
+            <group_parameter hints="{&apos;open&apos;: &apos;True&apos;}" name="Subdivision">
+              <number_parameter hints="{&apos;widget&apos;: &apos;checkBox&apos;}" name="Enable" value="0"/>
+            </group_parameter>
+            <group_parameter hints="{&apos;open&apos;: &apos;True&apos;}" name="Advanced">
+              <string_parameter hints="{&apos;options__order&apos;: [&apos;Object ID&apos;, &apos;Material ID&apos;], &apos;widget&apos;: &apos;mapper&apos;, &apos;options&apos;: {&apos;Object ID&apos;: &apos;0.0&apos;, &apos;Material ID&apos;: &apos;1.0&apos;}}" name="Id_Modes" value="1.0"/>
+            </group_parameter>
+          </group_parameter>
+        </group_parameter>
+      </group_parameter>
+      <node baseType="Group" eyepointx="-1191.41" eyepointy="1492.71" eyepointz="0.0" name="GlmMotionBlur" ns_basicDisplay="1.0" ns_bubbleZoom="0.0" ns_colorb="0.047059" ns_colorg="0.223529" ns_colorr="0.254902" ns_errorGlow="0.0" ns_iconName="" ns_offsetX="-1.0" ns_offsetY="178.5" type="Group" viewscalex="4.0" viewscaley="4.0" viewscalez="1.0" x="-2773.41" y="-976.909">
+        <port name="i0" source="GlmLibraryManager.i0" type="in"/>
+        <port name="o0" type="out"/>
+        <group_parameter name="GlmMotionBlur">
+          <group_parameter hints="{&apos;hideTitle&apos;: &apos;True&apos;}" name="user">
+            <string_parameter hints="{&apos;widget&apos;: &apos;cel&apos;, &apos;constant&apos;: &apos;True&apos;, &apos;help&apos;: &apos;&lt;b&gt;Apply Parameters on Goleam Procedural&lt;/b&gt;&lt;br&gt;\n&lt;br&gt;ex)&lt;br&gt;\n&lt;font size = 4 color=orange&gt;/root/world/geo/GolaemCache/procedural&lt;/font&gt;&apos;}" name="GolaemProcedural" value="((/root/world/geo/GolaemCache//*procedural*))"/>
+            <group_parameter hints="{&apos;open&apos;: &apos;True&apos;, &apos;constant&apos;: &apos;True&apos;, &apos;help&apos;: &apos;&lt;b&gt;Glm-Start Frame&lt;/b&gt; = shutter Open\n&lt;br&gt;\n&lt;b&gt;Glm Size&lt;/b&gt; = (shutter Close - shutter Open)\n&lt;br&gt;\n&lt;b&gt;Glm Sample&lt;/b&gt; = maxTimeSamples&apos;}" name="MotionBlur">
+              <number_parameter expression="getParent().user.Settings.MotionBlur.Enable" hints="{&apos;widget&apos;: &apos;checkBox&apos;, &apos;constant&apos;: &apos;True&apos;}" isexpression="true" name="Enable"/>
+              <number_parameter expression="getParent().user.Settings.MotionBlur.maxTimeSamples" hints="{&apos;constant&apos;: &apos;True&apos;, &apos;min&apos;: &apos;0.0&apos;, &apos;int&apos;: &apos;True&apos;, &apos;sensitivity&apos;: &apos;1.0&apos;, &apos;slider&apos;: &apos;False&apos;}" isexpression="true" name="maxTimeSamples"/>
+              <number_parameter expression="getParent().user.Settings.MotionBlur.shutterOpen" hints="{&apos;constant&apos;: &apos;True&apos;}" isexpression="true" name="shutterOpen"/>
+              <number_parameter expression="getParent().user.Settings.MotionBlur.shutterClose" hints="{&apos;constant&apos;: &apos;True&apos;}" isexpression="true" name="shutterClose"/>
+              <string_parameter hints="{&apos;widget&apos;: &apos;scriptToolbar&apos;, &apos;buttonData&apos;: [{&apos;text&apos;: &apos;Set Motionblur from current RenderSettings&apos;, &apos;icon&apos;: &apos;/westworld/inhouse/ww_katana/WW/Script/python/ico/setMB.png&apos;, &apos;scriptText&apos;: &apos;import glm_GMS\nglm_GMS.setMotionBlur(node)&apos;, &apos;flat&apos;: 0}]}" name="newParameter" value=""/>
+            </group_parameter>
+          </group_parameter>
+        </group_parameter>
+        <node baseType="OpScript" name="MotionBlurGolaem21" type="OpScript" x="-1194.66" y="1447.09">
+          <port name="i0" source="GlmMotionBlur.i0" type="in"/>
+          <port name="out" returns="o0" type="out"/>
+          <group_parameter name="MotionBlurGolaem21">
+            <string_parameter expression="=^/user.GolaemProcedural" name="CEL"/>
+            <string_parameter name="location" value="/root/world/location"/>
+            <group_parameter hints="{&apos;hide&apos;:&apos;True&apos;}" name="script">
+              <string_parameter name="lua" value="local mbOn = Interface.GetOpArg(&apos;user.mbOn&apos;):getValue()&#0010;local mbStartF = Interface.GetOpArg(&apos;user.mbStartF&apos;):getValue()&#0010;local mbWinSize = Interface.GetOpArg(&apos;user.mbWinSize&apos;):getValue()&#0010;local mbSample = Interface.GetOpArg(&apos;user.mbSample&apos;):getValue()&#0010;&#0010;Interface.SetAttr(&apos;rendererProcedural.args.motionBlurEnable&apos;, IntAttribute(mbOn))&#0010;Interface.SetAttr(&apos;rendererProcedural.args.motionBlurStart&apos;, FloatAttribute(mbStartF))&#0010;Interface.SetAttr(&apos;rendererProcedural.args.motionBlurWindowSize&apos;, FloatAttribute(mbWinSize))&#0010;Interface.SetAttr(&apos;rendererProcedural.args.motionBlurSamples&apos;, IntAttribute(mbSample))"/>
+            </group_parameter>
+            <string_parameter name="executionMode" value="immediate"/>
+            <string_parameter name="applyWhere" value="at locations matching CEL"/>
+            <string_parameter name="applyWhen" value="during op resolve"/>
+            <string_parameter name="modifierNameMode" value="node name"/>
+            <string_parameter name="modifierName" value="modifier"/>
+            <string_parameter name="resolveIds" value=""/>
+            <number_parameter name="recursiveEnable" value="0"/>
+            <string_parameter name="disableAt" value=""/>
+            <string_parameter name="inputBehavior" value="by index"/>
+            <number_parameter name="multisampleUserOpArgs" value="0"/>
+            <group_parameter hints="{&apos;hideTitle&apos;:&apos;True&apos;}" name="user">
+              <number_parameter expression="=^/user.MotionBlur.Enable" isexpression="true" name="mbOn"/>
+              <number_parameter expression="=^/user.MotionBlur.shutterOpen" isexpression="true" name="mbStartF"/>
+              <number_parameter expression="(getParent().user.MotionBlur.shutterClose)-(getParent().user.MotionBlur.shutterOpen)" isexpression="true" name="mbWinSize"/>
+              <number_parameter expression="=^/user.MotionBlur.maxTimeSamples" isexpression="true" name="mbSample"/>
+            </group_parameter>
+          </group_parameter>
+        </node>
+      </node>
+      <node baseType="Group" eyepointx="-1318.03" eyepointy="1471.34" eyepointz="0.0" modTime="1581930707" name="GlmSubdivision" ns_LiveGroupState="3.0" ns_basicDisplay="1.0" ns_bubbleZoom="0.0" ns_colorb="0.047059" ns_colorg="0.215686" ns_colorr="0.243137" ns_errorGlow="0.0" ns_iconName="" ns_offsetX="-1.0" ns_offsetY="178.5" type="Group" viewscalex="2.0" viewscaley="2.0" viewscalez="1.0" x="-2773.41" y="-1021.91">
+        <port name="i0" source="GlmMotionBlur.o0" type="in"/>
+        <port name="o0" type="out"/>
+        <group_parameter name="GlmSubdivision">
+          <group_parameter hints="{&apos;hideTitle&apos;: &apos;True&apos;}" name="user">
+            <string_parameter hints="{&apos;widget&apos;: &apos;cel&apos;, &apos;constant&apos;: &apos;True&apos;, &apos;help&apos;: &apos;&lt;b&gt;Apply Parameters on Goleam Procedural&lt;/b&gt;&lt;br&gt;\n&lt;br&gt;ex)&lt;br&gt;\n&lt;font size = 4 color=orange&gt;/root/world/geo/GolaemCache/procedural&lt;/font&gt;&apos;}" name="GolaemProcedural" value="((/root/world/geo/GolaemCache//*procedural*))"/>
+            <group_parameter hints="{&apos;open&apos;: &apos;True&apos;, &apos;constant&apos;: &apos;True&apos;}" name="Subdiv">
+              <number_parameter expression="0.0 if getParent().user.Settings.Subdivision.Enable == 0.0 else 1.0" hints="{&apos;int&apos;: &apos;True&apos;, &apos;max&apos;: &apos;1&apos;, &apos;widget&apos;: &apos;checkBox&apos;, &apos;constant&apos;: &apos;True&apos;, &apos;min&apos;: &apos;0&apos;}" isexpression="true" name="Enable"/>
+            </group_parameter>
+          </group_parameter>
+        </group_parameter>
+        <node baseType="OpScript" name="SubdGolaem20" type="OpScript" x="-1162.78" y="1508.09">
+          <port name="i0" source="GlmSubdivision.i0" type="in"/>
+          <port name="out" returns="o0" type="out"/>
+          <group_parameter name="SubdGolaem20">
+            <string_parameter expression="=^/user.GolaemProcedural" name="CEL"/>
+            <string_parameter name="location" value="/root/world/location"/>
+            <group_parameter hints="{&apos;hide&apos;:&apos;True&apos;}" name="script">
+              <string_parameter name="lua" value="local LEn = Interface.GetOpArg(&apos;user.LinkEnable&apos;):getValue()&#0010;Interface.SetAttr(&apos;rendererProcedural.args.subdivScheme&apos;, IntAttribute(LEn))&#0010;Interface.SetAttr(&apos;rendererProcedural.args.subdivFaceVarying&apos;, IntAttribute(3))&#0010;Interface.SetAttr(&apos;rendererProcedural.args.subdivInterp&apos;, IntAttribute(1))"/>
+            </group_parameter>
+            <string_parameter name="executionMode" value="immediate"/>
+            <string_parameter name="applyWhere" value="at locations matching CEL"/>
+            <string_parameter name="applyWhen" value="during op resolve"/>
+            <string_parameter name="modifierNameMode" value="node name"/>
+            <string_parameter name="modifierName" value="modifier"/>
+            <string_parameter name="resolveIds" value=""/>
+            <number_parameter name="recursiveEnable" value="0"/>
+            <string_parameter name="disableAt" value=""/>
+            <string_parameter name="inputBehavior" value="by index"/>
+            <number_parameter name="multisampleUserOpArgs" value="0"/>
+            <group_parameter hints="{&apos;hideTitle&apos;:&apos;True&apos;}" name="user">
+              <number_parameter expression="{1: 0}.get(int(getParent().user.Subdiv.Enable), 2)" hints="{&apos;int&apos;: &apos;True&apos;, &apos;constant&apos;: &apos;True&apos;}" isexpression="true" name="LinkEnable"/>
+            </group_parameter>
+          </group_parameter>
+        </node>
+      </node>
+      <node baseType="Group" eyepointx="-1141.28" eyepointy="1642.09" eyepointz="0.0" name="GlmIdModes" ns_basicDisplay="1.0" ns_bubbleZoom="0.0" ns_colorb="0.043137" ns_colorg="0.203922" ns_colorr="0.231373" ns_errorGlow="0.0" ns_iconName="" ns_offsetX="-1.0" ns_offsetY="178.5" type="Group" viewscalex="1.0" viewscaley="1.0" viewscalez="1.0" x="-2773.41" y="-1067.41">
+        <port name="i0" source="GlmSubdivision.o0" type="in"/>
+        <port name="o0" returns="o0" type="out"/>
+        <group_parameter name="GlmIdModes">
+          <group_parameter hints="{&apos;hideTitle&apos;: &apos;True&apos;}" name="user">
+            <string_parameter hints="{&apos;widget&apos;: &apos;cel&apos;, &apos;constant&apos;: &apos;True&apos;, &apos;help&apos;: &apos;&lt;b&gt;Apply Parameters on Goleam Procedural&lt;/b&gt;&lt;br&gt;\n&lt;br&gt;ex)&lt;br&gt;\n&lt;font size = 4 color=orange&gt;/root/world/geo/GolaemCache/procedural&lt;/font&gt;&apos;}" name="GolaemProcedural" value="((/root/world/geo/GolaemCache//*procedural*))"/>
+            <group_parameter hints="{&apos;open&apos;: &apos;True&apos;, &apos;constant&apos;: &apos;True&apos;}" name="Advanced">
+              <number_parameter expression="0.0 if getParent().user.Settings.Advanced.Id_Modes == 0.0 else 1.0" hints="{&apos;options__order&apos;: [&apos;Object id&apos;, &apos;Material id&apos;], &apos;constant&apos;: &apos;True&apos;, &apos;widget&apos;: &apos;mapper&apos;, &apos;options&apos;: {&apos;Object id&apos;: 0.0, &apos;Material id&apos;: 1.0}}" isexpression="true" name="Id_Modes"/>
+            </group_parameter>
+          </group_parameter>
+        </group_parameter>
+        <node baseType="OpScript" name="GLM_Id_Modes20" type="OpScript" x="-1194.66" y="1726.59">
+          <port name="i0" source="GlmIdModes.i0" type="in"/>
+          <port name="out" returns="o0" type="out"/>
+          <group_parameter name="GLM_Id_Modes20">
+            <string_parameter expression="=^/user.GolaemProcedural" name="CEL"/>
+            <string_parameter name="location" value="/root/world/location"/>
+            <group_parameter hints="{&apos;hide&apos;:&apos;True&apos;}" name="script">
+              <string_parameter name="lua" value="local LMd = Interface.GetOpArg(&apos;user.LinkMode&apos;):getValue()&#0010;Interface.SetAttr(&apos;rendererProcedural.args.objectIdMode&apos;, IntAttribute(LMd))&#0010;"/>
+            </group_parameter>
+            <string_parameter name="executionMode" value="immediate"/>
+            <string_parameter name="applyWhere" value="at locations matching CEL"/>
+            <string_parameter name="applyWhen" value="during op resolve"/>
+            <string_parameter name="modifierNameMode" value="node name"/>
+            <string_parameter name="modifierName" value="modifier"/>
+            <string_parameter name="resolveIds" value=""/>
+            <number_parameter name="recursiveEnable" value="0"/>
+            <string_parameter name="disableAt" value=""/>
+            <string_parameter name="inputBehavior" value="by index"/>
+            <number_parameter name="multisampleUserOpArgs" value="0"/>
+            <group_parameter hints="{&apos;widget&apos;: &apos;userParamsEditor&apos;, &apos;hideTitle&apos;: &apos;True&apos;}" name="user">
+              <number_parameter expression="=^/user.Advanced.Id_Modes" hints="{&apos;int&apos;: &apos;True&apos;, &apos;constant&apos;: &apos;True&apos;}" isexpression="true" name="LinkMode"/>
+            </group_parameter>
+          </group_parameter>
+        </node>
+      </node>
+    </node>
+  </node>
+</katana>
+
